@@ -60,36 +60,27 @@ export default {
     };
   },
   mounted() {
-    console.log("MoodForm component loaded");
-    this.fetchHistory();
+    this.fetchHistory(); 
   },
   methods: {
     async submitMood() {
-  console.log("User clicked submit button");
-  console.log("Name entered:", this.name);
-  console.log("Mood value entered:", this.mood);
-
-  
-  try {
-    const response = await fetch("https://lab5-api-g91e.onrender.com/api/moods", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: this.name,
-        mood: this.mood
-      })
-    });
-
-    console.log("API response status:", response.status);
-
-    const data = await response.json();
-    console.log("API response data:", data);
-
-  } catch (error) {
-    console.error("Error submitting mood:", error);
-  }
-},
-
+      this.loading = true;
+      this.error = null;
+      try {
+        const res = await api.post('/api/moods', {
+          user_id: 1,
+          mood_text: this.mood
+        });
+        
+        this.aiMessage = res.data.ai_message || res.data.aiMessage;
+        this.mood = ''; 
+        this.fetchHistory();
+      } catch (err) {
+        this.error = "Failed to connect to server. Is the backend running?";
+      } finally {
+        this.loading = false;
+      }
+    },
     async fetchHistory() {
       try {
         const res = await api.get('/api/moods');
