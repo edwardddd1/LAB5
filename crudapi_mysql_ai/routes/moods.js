@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
 
     // 2. Insert the mood using the userId we just found/created
     const [moodResult] = await db.query(
-      "INSERT INTO mood_entries (user_id, mood_text) VALUES (?, ?)",
+      "INSERT INTO mood_ent (user_id, mood_text) VALUES (?, ?)",
       [userId, mood_text]
     );
 
