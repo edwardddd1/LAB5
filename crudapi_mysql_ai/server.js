@@ -28,17 +28,3 @@ app.post("/api/moods", async (req, res) => {
 
   res.json({ message: "Mood saved successfully" });
 });
-
-app.post("/api/moods", async (req, res) => {
-  console.log("POST /mood request received");
-  console.log("Request body:", req.body);
-
-  const mood = req.body.mood;
-  const result = await db.query(
-    "INSERT INTO mood_log (mood) VALUES (?)",
-    [mood]
-  );
-
-  console.log("Database insert result:", result);
-  res.json({ message: "Mood saved successfully" });
-});
