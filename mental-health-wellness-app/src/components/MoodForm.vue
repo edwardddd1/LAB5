@@ -60,6 +60,7 @@ export default {
     };
   },
   mounted() {
+    console.log("MoodForm component loaded");
     this.fetchHistory();
   },
   methods: {
