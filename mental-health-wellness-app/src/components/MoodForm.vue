@@ -69,6 +69,7 @@ export default {
   console.log("Name entered:", this.name);
   console.log("Mood value entered:", this.mood);
 
+  
   try {
     const response = await fetch("https://lab5-api-g91e.onrender.com/api/moods", {
       method: "POST",
